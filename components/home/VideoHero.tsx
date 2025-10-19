@@ -70,7 +70,7 @@ export default function VideoHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Discover our handcrafted candles and mindful apparel designed to elevate your everyday moments
+            Discover our mindful apparel designed to elevate your everyday moments
           </motion.p>
 
           <motion.div
@@ -83,7 +83,7 @@ export default function VideoHero() {
               size="lg" 
               className="bg-primary hover:opacity-90 text-primary-foreground px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105"
             >
-              Shop Candles
+              Shop Shirts
             </Button>
             <Button 
               variant="outline" 

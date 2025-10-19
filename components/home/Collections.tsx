@@ -7,14 +7,6 @@ import { Button } from '@/components/ui/button';
 
 const collections = [
   {
-    id: 'candles',
-    name: 'Artisan Candles',
-    description: 'Hand-poured candles with natural soy wax and essential oils',
-    image: 'https://images.pexels.com/photos/4203091/pexels-photo-4203091.jpeg?auto=compress&cs=tinysrgb&w=800',
-    href: '/collections/candles',
-    featured: true
-  },
-  {
     id: 'shirts',
     name: 'Mindful Apparel',
     description: 'Comfortable, sustainable clothing for conscious living',

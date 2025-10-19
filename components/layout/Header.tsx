@@ -25,7 +25,6 @@ export default function Header() {
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
   { name: 'Shirts', href: '/collections/shirts' },
-  { name: 'Candles', href: '/collections/candles' },
   ];
 
   return (

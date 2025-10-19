@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import Footer from '@/components/layout/footer';
 import { findProductById, listProducts } from '@/lib/products';
 import { formatInr } from '@/lib/utils';
 import Link from 'next/link';

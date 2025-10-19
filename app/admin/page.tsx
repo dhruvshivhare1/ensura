@@ -1,6 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Package, 
@@ -16,6 +19,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useFirestore } from '@/hooks/useFirestore';
+import { TestFirebase } from '@/components/test-firebase';
+import type { Order } from '@/types';
 
 const stats = [
   {
@@ -68,35 +77,26 @@ const recentOrders = [
   }
 ];
 
-const products = [
-  {
-    id: '1',
-    name: 'Lavender Dreams Candle',
-    category: 'Candles',
-    price: 28,
-    stock: 45,
-    status: 'active'
-  },
-  {
-    id: '2',
-    name: 'Zen Harmony Tee',
-    category: 'Shirts',
-    price: 45,
-    stock: 23,
-    status: 'active'
-  },
-  {
-    id: '3',
-    name: 'Eucalyptus Mint Candle',
-    category: 'Candles',
-    price: 32,
-    stock: 12,
-    status: 'low-stock'
-  }
-];
+interface AdminProductRow {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+  status?: 'active' | 'low-stock';
+}
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
+  const { data: productDocs, addItem: addProduct, loading: productsLoading } = useFirestore<AdminProductRow>('products');
+  const { data: orders, loading: ordersLoading } = useFirestore<Order>('orders');
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    category: '',
+    price: 0,
+    stock: 0
+  });
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -107,6 +107,41 @@ export default function AdminDashboard() {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
+
+  const productRows = useMemo<AdminProductRow[]>(() => {
+    return (productDocs || []).map(p => ({
+      ...p,
+      status: p.stock <= 5 ? 'low-stock' : 'active'
+    }));
+  }, [productDocs]);
+
+  const recentOrders = useMemo(() => {
+    return (orders || []).slice(0, 5).map(o => ({
+      id: o.id,
+      customer: o.userId,
+      total: o.total,
+      status: o.status,
+      date: new Date(o.createdAt as any).toISOString().split('T')[0]
+    }));
+  }, [orders]);
+
+  async function handleCreateProduct(e: React.FormEvent) {
+    e.preventDefault();
+    const payload = {
+      name: newProduct.name,
+      category: newProduct.category || 'uncategorized',
+      price: Number(newProduct.price) || 0,
+      stock: Number(newProduct.stock) || 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      featured: false,
+      images: [] as string[]
+    } as any;
+    await addProduct(payload);
+    setIsAddOpen(false);
+    setNewProduct({ name: '', category: '', price: 0, stock: 0 });
+    setActiveTab('products');
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -130,6 +165,11 @@ export default function AdminDashboard() {
             </TabsList>
 
             <TabsContent value="overview" className="space-y-6">
+              {/* Firebase Test */}
+              <div className="flex justify-center">
+                <TestFirebase />
+              </div>
+              
               {/* Stats Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map((stat, index) => (
@@ -219,7 +259,7 @@ export default function AdminDashboard() {
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
-                        {recentOrders.map((order) => (
+                        {(ordersLoading ? [] : recentOrders).map((order) => (
                           <tr key={order.id} className="hover:bg-gray-50">
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                               {order.id}
@@ -260,10 +300,43 @@ export default function AdminDashboard() {
             <TabsContent value="products" className="space-y-6">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-900">Products</h2>
-                <Button>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Product
-                </Button>
+                <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
+                  <DialogTrigger asChild>
+                    <Button>
+                      <Plus className="h-4 w-4 mr-2" />
+                      Add Product
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Add product</DialogTitle>
+                    </DialogHeader>
+                    <form className="space-y-4" onSubmit={handleCreateProduct}>
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Name</Label>
+                        <Input id="name" value={newProduct.name} onChange={e => setNewProduct(p => ({ ...p, name: e.target.value }))} required />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="category">Category</Label>
+                        <Input id="category" value={newProduct.category} onChange={e => setNewProduct(p => ({ ...p, category: e.target.value }))} />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="price">Price (₹)</Label>
+                          <Input id="price" type="number" min="0" step="0.01" value={newProduct.price} onChange={e => setNewProduct(p => ({ ...p, price: Number(e.target.value) }))} required />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="stock">Stock</Label>
+                          <Input id="stock" type="number" min="0" value={newProduct.stock} onChange={e => setNewProduct(p => ({ ...p, stock: Number(e.target.value) }))} required />
+                        </div>
+                      </div>
+                      <div className="flex justify-end gap-2">
+                        <Button type="button" variant="secondary" onClick={() => setIsAddOpen(false)}>Cancel</Button>
+                        <Button type="submit">Save</Button>
+                      </div>
+                    </form>
+                  </DialogContent>
+                </Dialog>
               </div>
 
               <Card>
@@ -293,7 +366,7 @@ export default function AdminDashboard() {
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
-                        {products.map((product) => (
+                        {(productsLoading ? [] : productRows).map((product) => (
                           <tr key={product.id} className="hover:bg-gray-50">
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="text-sm font-medium text-gray-900">{product.name}</div>

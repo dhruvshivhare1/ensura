@@ -12,7 +12,8 @@ import {
   query,
   where,
   orderBy,
-  limit
+  limit,
+  onSnapshot
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
@@ -72,7 +73,17 @@ export function useFirestore<T>(collectionName: string) {
   };
 
   useEffect(() => {
-    fetchData();
+    setLoading(true);
+    const unsubscribe = onSnapshot(collection(db, collectionName), (snapshot) => {
+      const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as T[];
+      setData(items);
+      setLoading(false);
+    }, (err) => {
+      setError(err.message);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
   }, [collectionName]);
 
   return {

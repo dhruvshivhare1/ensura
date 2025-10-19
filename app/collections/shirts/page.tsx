@@ -7,7 +7,7 @@ import { Star, Filter, Grid, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import Footer from '@/components/layout/footer';
 import Link from 'next/link';
 
 const shirts = [

@@ -10,7 +10,6 @@ import OverlapSection from '@/components/ui/overlap-section';
 
 const footerLinks = {
   shop: [
-    { name: 'Candles', href: '/collections/candles' },
     { name: 'Shirts', href: '/collections/shirts' },
     { name: 'Gift Sets', href: '/collections/gifts' },
     { name: 'Sale', href: '/collections/sale' }

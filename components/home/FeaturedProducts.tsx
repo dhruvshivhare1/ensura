@@ -31,7 +31,7 @@ const featuredProducts = [
   },
   {
     id: '3',
-    name: 'Eucalyptus Mint Candle 556677',
+    name: 'Eucalyptus Mint Candle 556677 ',
     price: 32,
     image: 'https://images.pexels.com/photos/6143181/pexels-photo-6143181.jpeg?auto=compress&cs=tinysrgb&w=400',
     rating: 4.9,

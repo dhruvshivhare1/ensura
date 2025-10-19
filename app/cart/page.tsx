@@ -1,7 +1,7 @@
 'use client';
 
 import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import Footer from '@/components/layout/footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -23,8 +23,8 @@ export default function CartPage() {
               <CardContent className="p-8 text-center space-y-4">
                 <h1 className="text-2xl font-display font-semibold text-foreground">Your cart is empty</h1>
                 <p className="text-gray-600">Add items from the collections to continue.</p>
-                <Link href="/collections/candles" className="inline-flex">
-                  <Button className="bg-primary text-primary-foreground">Browse Candles</Button>
+                <Link href="/collections/shirts" className="inline-flex">
+                  <Button className="bg-primary text-primary-foreground">Browse Shirts</Button>
                 </Link>
               </CardContent>
             </Card>

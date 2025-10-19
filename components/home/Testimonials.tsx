@@ -65,19 +65,9 @@ export default function Testimonials() {
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
             >
-              <div className="flex items-center mb-6">
-                <div className="relative w-14 h-14 rounded-full overflow-hidden mr-4">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-600">{testimonial.role}</p>
-                </div>
+              <div className="mb-6">
+                <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                <p className="text-sm text-gray-600">{testimonial.role}</p>
               </div>
 
               <div className="flex text-yellow-400 mb-4">

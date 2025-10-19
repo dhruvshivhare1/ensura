@@ -48,13 +48,11 @@ export default function Collections() {
           </p>
         </motion.div>
 
-  <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-8">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {collections.map((collection, index) => (
             <motion.div
               key={collection.id}
-              className={`group relative overflow-hidden rounded-2xl ${
-                collection.featured ? 'lg:col-span-1' : 'lg:col-span-1'
-              }`}
+              className="group relative overflow-hidden rounded-2xl"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -70,14 +68,13 @@ export default function Collections() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 
-                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 text-white">
-                  <h3 className="text-base sm:text-xl md:text-2xl font-bold mb-0.5 sm:mb-2">{collection.name}</h3>
-                  <p className="text-[10px] sm:text-sm md:text-base text-white/90 mb-2 sm:mb-4 line-clamp-2">{collection.description}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3">{collection.name}</h3>
+                  <p className="text-sm sm:text-base text-white/90 mb-4 sm:mb-6 line-clamp-2">{collection.description}</p>
                   
                   <Link href={collection.href}>
                     <Button 
-                      size="sm"
-                      className="bg-card text-foreground hover:bg-accent rounded-full px-3 py-1 text-[10px] sm:px-5 sm:py-2 sm:text-xs transition-all duration-300 transform group-hover:scale-105"
+                      className="bg-white text-primary hover:bg-accent hover:text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-300 transform group-hover:scale-105"
                     >
                       Explore Collection
                     </Button>

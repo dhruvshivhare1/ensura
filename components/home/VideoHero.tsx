@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function VideoHero() {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -79,19 +80,23 @@ export default function VideoHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <Button 
-              size="lg" 
-              className="bg-primary hover:opacity-90 text-primary-foreground px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105"
-            >
-              Shop Shirts
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-full font-medium transition-all duration-300"
-            >
-              Explore Collection
-            </Button>
+            <Link href="/collections/shirts">
+              <Button 
+                size="lg" 
+                className="bg-primary hover:opacity-90 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
+              >
+                Shop Shirts
+              </Button>
+            </Link>
+            <Link href="/collections">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-full font-medium transition-all duration-300 w-full sm:w-auto"
+              >
+                Explore Collection
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>

@@ -63,7 +63,7 @@ export default function Header() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <Image src={require('../../images/logo.png')} alt="Ensaura" fill className="object-contain" priority />
+                <Image src={require('../../images/ensauralogo.png')} alt="Ensaura" fill className="object-contain" priority />
               </motion.div>
             </Link>
           </div>

@@ -73,10 +73,10 @@ export default function About() {
               </h2>
               <div className="space-y-5 text-lg leading-relaxed text-gray-700">
                 <p>
-                  At my core, I have always believed in wellness, in slowing down, and in choosing to prioritize ourselves even when the world tells us otherwise. Like many, I’ve experienced moments of deep self-doubt, struggles with self-esteem, and the weight of questioning my own worth. It was through those very experiences that I discovered the power of self-love—not as a buzzword, but as a practice that can transform how we see and treat ourselves.
+                  At my core, I have always believed in wellness, in slowing down, and in choosing to prioritize ourselves even when the world tells us otherwise. Like many, I’ve experienced moments of deep self-doubt, struggles with self-esteem, and the weight of questioning my own worth. It was through those very experiences that I discovered the power of self love not as a buzzword, but as a practice that can transform how we see and treat ourselves.
                 </p>
                 <p>
-                  With my background in Psychology, I began to understand that small rituals—affirmations, journaling, mindful spaces, even the power of scent—can rewire our thoughts, ease our emotions, and nurture our inner strength. Ensauraa grew from that realization and from my heart’s desire to help others access the same tools and knowledge that helped me heal.
+                  With my background in Psychology, I began to understand that small rituals—affirmations, journaling, mindful spaces, ease our emotions, and nurture our inner strength. Ensauraa grew from that realization and from my heart’s desire to help others access the same tools and knowledge that helped me heal.
                 </p>
                 <p>
                   The name carries its own story: Ensō, the Zen circle, symbolizes wholeness and the beauty of imperfection; Aura reflects the unique energy we each radiate when aligned with self-love. The Ginkgo leaf, chosen as our emblem, represents resilience and renewal—a reminder that we, too, can grow back stronger, no matter what we’ve endured.

@@ -57,6 +57,34 @@ const products: Product[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+  {
+    id: "natural-grey-linen-shrug",
+    name: "Natural Grey Linen Shrug",
+    description: `I am more than enough  always was: Often, our sense of worth becomes tied to achievements, validation, or comparison but true emotional healing begins when we realise that that our worth isn’t something to earn, it already exists within us. it helps reframe self-doubt into self-acceptance. This affirmation will make you remind that you have always been enough.  
+
+Features- 
+
+1.Linen fabric 
+
+ 
+2.Relaxed, breathable fit with a single-button closure
+
+ 
+3.Natural Grey – a soft, earthy grey with gentle beige undertones that reflect the natural texture of linen.`,
+    price: 2650,
+    category: 'shirts',
+    images: [
+      "https://res.cloudinary.com/dwoifav4o/image/upload/v1762767357/natural_grey_linen1_fxzvt9.png",
+      "https://res.cloudinary.com/dwoifav4o/image/upload/v1762767357/natural_grey_linen_ktljje.png",
+      "https://res.cloudinary.com/dwoifav4o/image/upload/v1762767357/Natural_Grey_Linen2_bk9jm9.png",
+      "https://res.cloudinary.com/dwoifav4o/image/upload/v1762767356/Natural_Grey_Linen_3_nntmcg.png"
+    ],
+    stock: 50,
+    featured: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 ];
 
 export function listProducts(): Product[] {
